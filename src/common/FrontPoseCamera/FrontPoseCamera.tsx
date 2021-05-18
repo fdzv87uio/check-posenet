@@ -44,10 +44,10 @@ const FrontPoseCamera = ({
 
   async function Posenet() {
     const net = await posenet.load({
-      architecture: 'ResNet50',
-      outputStride: 32,
-      inputResolution: { width: 257, height: 200 },
-      quantBytes: 2,
+      architecture: 'MobileNetV1',
+      outputStride: 16,
+      inputResolution: 257,
+      multiplier: 0.5,
     })
 
     setInterval(() => {

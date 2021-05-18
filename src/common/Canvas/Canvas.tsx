@@ -65,7 +65,7 @@ export const Canvas = ({
             position: 'absolute',
             marginLeft: 'auto',
             marginRight: 'auto',
-            top: 115,
+            top: 95,
             left: 0,
             right: 0,
             zIndex: 10,
