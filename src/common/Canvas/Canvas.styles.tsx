@@ -5,7 +5,7 @@ export const Cross = Styled.img`
             position: absolute;
             margin-left: auto;
             margin-right: 'auto';
-            top: 50px;
+            top: 150px;
             left: 35px;
             z-index: 9;
 

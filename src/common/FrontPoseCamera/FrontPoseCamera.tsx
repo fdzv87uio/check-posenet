@@ -48,7 +48,7 @@ const FrontPoseCamera = ({
         architecture: 'MobileNetV1',
         outputStride: 16,
         inputResolution: 257,
-        multiplier: 0.75,
+        multiplier: 0.5,
       })
   
       setInterval(() => {
