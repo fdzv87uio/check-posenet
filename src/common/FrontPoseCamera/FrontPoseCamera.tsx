@@ -36,25 +36,23 @@ const FrontPoseCamera = ({
   // refs for both the webcam and canvas components
   const camRef = useRef(null)
   const canvasRef = useRef(null)
-  // Constants 
-  const width=400
-  const height=700
+  // Constants
+  const width = 400
+  const height = 700
 
   // posenet function
 
   async function Posenet() {
-    
-      const net = await posenet.load({
-        architecture: 'MobileNetV1',
-        outputStride: 16,
-        inputResolution: 257,
-        multiplier: 0.5,
-      })
-  
-      setInterval(() => {
-        detect(net)
-      }, 1000)
-    
+    const net = await posenet.load({
+      architecture: 'ResNet50',
+      outputStride: 32,
+      inputResolution: { width: 257, height: 200 },
+      quantBytes: 2,
+    })
+
+    setInterval(() => {
+      detect(net)
+    }, 1000)
   }
 
   //Postnet detection method
@@ -67,8 +65,8 @@ const FrontPoseCamera = ({
     ) {
       // Get Video Properties
       const video = camRef.current.video
-      const videoWidth =  width
-      const videoHeight =  height
+      const videoWidth = width
+      const videoHeight = height
       // Make detections
       const pose = await net.estimateSinglePose(video)
       drawCanvas(pose, video, videoWidth, videoHeight, canvasRef)
@@ -80,13 +78,13 @@ const FrontPoseCamera = ({
     canvas.current.width = videoWidth
     canvas.current.height = videoHeight
     const kp = pose['keypoints']
-    drawKeypoints(kp, 0.40, ctx)
+    drawKeypoints(kp, 0.35, ctx)
   }
 
   const startPoseNet = async () => {
     if (
       typeof window !== 'undefined' &&
-      typeof window.navigator !== 'undefined' 
+      typeof window.navigator !== 'undefined'
     ) {
       Posenet()
     }
@@ -124,12 +122,7 @@ const FrontPoseCamera = ({
           />
         ) : null}
         {permissionGranted === true ? (
-          <Canvas
-            width={width}
-            height={height}
-            dpr={1}
-            isAnimating={true}
-          >
+          <Canvas width={width} height={height} dpr={1} isAnimating={true}>
             <OrientationAxis
               beta={deviceOrientation?.beta}
               gamma={deviceOrientation?.gamma}
