@@ -5,7 +5,7 @@ import * as tf from '@tensorflow/tfjs'
 import * as posenet from '@tensorflow-models/posenet'
 import '@tensorflow/tfjs-backend-webgl'
 // web camera library
-import { Camera } from 'react-cam'
+import Webcam from 'react-webcam'
 //Styled components ref
 import { useStyles } from './FrontPoseCamera.styles'
 import { drawKeypoints } from '../../../utils/tensorflow-utils'
@@ -60,14 +60,13 @@ const FrontPoseCamera = ({
     if (
       typeof camRef.current !== 'undefined' &&
       camRef.current !== null &&
-      typeof camRef.current.camRef.current !== 'undefined' &&
-      camRef.current.camRef.current !==null
+      typeof camRef.current.video !== 'undefined' &&
+      camRef.current.video.readyState === 4
     ) {
       // Get Video Properties
-      const video = camRef.current.camRef.current
-      console.log(video)
-      const videoWidth = width
-      const videoHeight = height
+      const video = camRef.current.video
+      const videoWidth = camRef.current.videoWidth
+      const videoHeight = camRef.current.videoHeight
       // Make detections
       const pose = await net.estimateSinglePose(video)
       console.log(pose)
@@ -80,7 +79,7 @@ const FrontPoseCamera = ({
     canvas.current.width = videoWidth
     canvas.current.height = videoHeight
     const kp = pose['keypoints']
-    drawKeypoints(kp, 0.35, ctx)
+    drawKeypoints(kp, 0.40, ctx)
   }
 
   const startPoseNet = async () => {
@@ -94,20 +93,15 @@ const FrontPoseCamera = ({
 
   startPoseNet()
 
-  function capture(imgSrc) {
-    console.log(imgSrc);
-  }
-
   return (
     <>
       <div className={classes.cameraWrapper}>
         {typeof window !== 'undefined' &&
         typeof window.navigator !== 'undefined' ? (
-          <Camera
-            showFocus={false}
-            front={true}
-            capture={capture}
+          <Webcam
+            audio={false}
             ref={camRef}
+            screenshotFormat="image/jpeg"
             width={width}
             height={height}
           />
