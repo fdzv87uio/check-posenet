@@ -14,23 +14,23 @@ import { OrientationAxis } from '../OrientationAxis/OrientationAxis'
 import { DeviceOrientationInfo } from '../../pages/pose-selection'
 
 // Define general type for useWindowSize hook, which includes width and height
-interface Size {
-  width: number | undefined
-  height: number | undefined
-}
+// interface Size {
+//   width: number | undefined
+//   height: number | undefined
+// }
 export interface CameraWrapperProps {
   width: number | undefined
   height: number | undefined
 }
 
 const FrontPoseCamera = ({
-  deviceOrientation,
-  permissionGranted,
+  // deviceOrientation,
+  // permissionGranted,
   props,
 }: {
   props: CameraWrapperProps
-  deviceOrientation: DeviceOrientationInfo
-  permissionGranted: boolean
+  // deviceOrientation: DeviceOrientationInfo
+  // permissionGranted: boolean
 }): JSX.Element => {
   const classes = useStyles(props)
   // refs for both the webcam and canvas components
@@ -38,7 +38,7 @@ const FrontPoseCamera = ({
   const canvasRef = useRef(null)
   // Constants
   const width = 400
-  const height = 700
+  const height = 600
 
   // posenet function
 
@@ -121,14 +121,14 @@ const FrontPoseCamera = ({
             }}
           />
         ) : null}
-        {permissionGranted === true ? (
+        {/* {permissionGranted === true ? (
           <Canvas width={width} height={height} dpr={1} isAnimating={true}>
             <OrientationAxis
               beta={deviceOrientation?.beta}
               gamma={deviceOrientation?.gamma}
             ></OrientationAxis>
           </Canvas>
-        ) : null}
+        ) : null} */}
       </div>
     </>
   )

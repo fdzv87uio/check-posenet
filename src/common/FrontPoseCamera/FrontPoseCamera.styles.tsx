@@ -6,6 +6,6 @@ export const useStyles = makeStyles({
     display: 'grid',
     gridTemplateColumns: '1fr',
     width: 400,
-    height: 700,
+    height: 600,
   },
 })
