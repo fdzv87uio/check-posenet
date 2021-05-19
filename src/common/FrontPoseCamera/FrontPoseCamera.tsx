@@ -93,6 +93,10 @@ const FrontPoseCamera = ({
 
   startPoseNet()
 
+  const videoConstraints = {
+    facingMode: { exact: "environment" }
+  };
+
   return (
     <>
       <div className={classes.cameraWrapper}>
@@ -104,6 +108,7 @@ const FrontPoseCamera = ({
             screenshotFormat="image/jpeg"
             width={width}
             height={height}
+            videoConstraints={videoConstraints}
           />
         ) : null}
         {typeof window !== 'undefined' &&
