@@ -78,7 +78,7 @@ const FrontPoseCamera = ({
     canvas.current.width = videoWidth
     canvas.current.height = videoHeight
     const kp = pose['keypoints']
-    drawKeypoints(kp, 0.35, ctx)
+    drawKeypoints(kp, 0.50, ctx)
   }
 
   const startPoseNet = async () => {
