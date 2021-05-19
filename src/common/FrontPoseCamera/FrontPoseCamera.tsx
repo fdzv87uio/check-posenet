@@ -94,7 +94,7 @@ const FrontPoseCamera = ({
   startPoseNet()
 
   const videoConstraints = {
-    facingMode: { exact: "environment" }
+    facingMode: "environment" 
   };
 
   return (
