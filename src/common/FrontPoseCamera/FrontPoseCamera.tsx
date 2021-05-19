@@ -18,9 +18,6 @@ export interface CameraWrapperProps {
   height: number | undefined
 }
 
-const videoConstraints = {
-  facingMode: "environment"
-};
 
 const FrontPoseCamera = ({
    deviceOrientation,
@@ -100,10 +97,8 @@ const FrontPoseCamera = ({
           <Webcam
             audio={false}
             ref={camRef}
-            screenshotFormat="image/jpeg"
             width={width}
             height={height}
-            videoConstraints={videoConstraints}
           />
         ) : null}
         {typeof window !== 'undefined' &&
