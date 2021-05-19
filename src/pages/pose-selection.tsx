@@ -62,8 +62,8 @@ export default function PoseSelection({
   if (frontPose === true) {
     return (
       <FrontPoseCamera
-        // deviceOrientation={deviceOrientation}
-        // permissionGranted={permissionGranted}
+        deviceOrientation={deviceOrientation}
+        permissionGranted={permissionGranted}
         props={props}
       />
     )
@@ -97,7 +97,7 @@ export default function PoseSelection({
             <div className={classes.frontImage}>
               <img
                 onClick={() => {
-                  // grantPermissionForDeviceOrientation()
+                  grantPermissionForDeviceOrientation()
                   setFrontPose(true)
                 }}
                 src="/images/Camera_Icon.png"
