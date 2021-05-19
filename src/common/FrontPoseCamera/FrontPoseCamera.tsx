@@ -64,9 +64,9 @@ const FrontPoseCamera = ({
       camRef.current.video.readyState === 4
     ) {
       // Get Video Properties
-      const video = camRef.current.video
-      const videoWidth = camRef.current.videoWidth
-      const videoHeight = camRef.current.videoHeight
+      const video = camRef.current.video;
+      const videoWidth = width;
+      const videoHeight = height;
       // Make detections
       const pose = await net.estimateSinglePose(video)
       console.log(pose)
