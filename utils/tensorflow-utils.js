@@ -16,6 +16,7 @@
  */
 import * as posenet from '@tensorflow-models/posenet'
 import * as tf from '@tensorflow/tfjs-core'
+import variance from "compute-variance"
 
 const color = 'aqua'
 const boundingBoxColor = 'red'
@@ -133,27 +134,63 @@ export function drawSkeleton(keypoints, minConfidence, ctx, scale = 1) {
  * Draw pose keypoints onto a canvas
  */
 export function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
-  var kp9 = keypoints[9]
-  var kp10 = keypoints[10]
-  var kp15 = keypoints[15]
-  var kp16 = keypoints[16]
+  //shoulders
+  var kp5 = keypoints[5] //left
+  var kp6 = keypoints[6] //right
+  // wrists
+  var kp9 = keypoints[9] //left
+  var kp10 = keypoints[10] //right
+  //ankles
+  var kp15 = keypoints[15] //left
+  var kp16 = keypoints[16] //right
 
-  if (kp9.score > minConfidence) {
-    drawPoint(ctx, kp9.position.y, kp9.position.x, 25, '#FFD733')
-    drawRing(ctx, kp9.position.y, kp9.position.x, 25, '#FFD733')
+  var horizontal = [kp9.position.y, kp10.position.y, kp5.position.y, kp6.position.y]
+  var vertical = [kp15.position.x, kp16.position.x, kp5.position.x, kp6.position.x]
+  console.log(horizontal)
+  console.log(vertical)
+
+  var horizontalSD = Math.sqrt(variance(horizontal))
+  var verticalSD = Math.sqrt(variance(vertical))
+
+  console.log(horizontalSD)
+  console.log(verticalSD)
+
+  if ( verticalSD < 10 && horizontalSD < 10 ){
+    if (kp9.score > minConfidence) {
+      drawPoint(ctx, kp9.position.y, kp9.position.x, 25, '#FFD733')
+      drawRing(ctx, kp9.position.y, kp9.position.x, 25, '#FFD733')
+    }
+    if (kp10.score > minConfidence) {
+      drawPoint(ctx, kp10.position.y, kp10.position.x, 25, '#FFD733')
+      drawRing(ctx, kp10.position.y, kp10.position.x, 25, '#FFD733')
+    }
+    if (kp15.score > minConfidence) {
+      drawPoint(ctx, kp15.position.y, kp15.position.x, 25, '#FFD733')
+      drawRing(ctx, kp15.position.y, kp15.position.x, 25, '#FFD733')
+    }
+    if (kp16.score > minConfidence) {
+      drawPoint(ctx, kp16.position.y, kp16.position.x, 25, '#FFD733')
+      drawRing(ctx, kp16.position.y, kp16.position.x, 25, '#FFD733')
+    }
+  } else {
+    if (kp9.score > minConfidence) {
+      drawPoint(ctx, kp9.position.y, kp9.position.x, 25, '#FFFFFF')
+      drawRing(ctx, kp9.position.y, kp9.position.x, 25, '#FFFFFF')
+    }
+    if (kp10.score > minConfidence) {
+      drawPoint(ctx, kp10.position.y, kp10.position.x, 25, '#FFFFFF')
+      drawRing(ctx, kp10.position.y, kp10.position.x, 25, '#FFFFFF')
+    }
+    if (kp15.score > minConfidence) {
+      drawPoint(ctx, kp15.position.y, kp15.position.x, 25, '#FFFFFF')
+      drawRing(ctx, kp15.position.y, kp15.position.x, 25, '#FFFFFF')
+    }
+    if (kp16.score > minConfidence) {
+      drawPoint(ctx, kp16.position.y, kp16.position.x, 25, '#FFFFFF')
+      drawRing(ctx, kp16.position.y, kp16.position.x, 25, '#FFFFFF')
+    }
   }
-  if (kp10.score > minConfidence) {
-    drawPoint(ctx, kp10.position.y, kp10.position.x, 25, '#FFD733')
-    drawRing(ctx, kp10.position.y, kp10.position.x, 25, '#FFD733')
-  }
-  if (kp15.score > minConfidence) {
-    drawPoint(ctx, kp15.position.y, kp15.position.x, 25, '#FFD733')
-    drawRing(ctx, kp15.position.y, kp15.position.x, 25, '#FFD733')
-  }
-  if (kp16.score > minConfidence) {
-    drawPoint(ctx, kp16.position.y, kp16.position.x, 25, '#FFD733')
-    drawRing(ctx, kp16.position.y, kp16.position.x, 25, '#FFD733')
-  }
+  
 }
 
 /**

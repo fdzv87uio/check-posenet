@@ -28,6 +28,7 @@
     "@tensorflow-models/posenet": "^2.2.2",
     "@tensorflow/tfjs": "^3.6.0",
     "@tensorflow/tfjs-backend-webgl": "^3.6.0",
+    "compute-variance": "^3.0.0",
     "lodash": "^4.17.21",
     "mobx": "^6.3.0",
     "mobx-react-lite": "^3.2.0",

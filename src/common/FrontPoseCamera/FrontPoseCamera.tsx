@@ -52,7 +52,7 @@ const FrontPoseCamera = ({
 
     setInterval(() => {
       detect(net)
-    }, 1000)
+    }, 700)
   }
 
   //Postnet detection method
@@ -69,6 +69,7 @@ const FrontPoseCamera = ({
       const videoHeight = height
       // Make detections
       const pose = await net.estimateSinglePose(video)
+      console.log(pose)
       drawCanvas(pose, video, videoWidth, videoHeight, canvasRef)
     }
   }
@@ -78,7 +79,7 @@ const FrontPoseCamera = ({
     canvas.current.width = videoWidth
     canvas.current.height = videoHeight
     const kp = pose['keypoints']
-    drawKeypoints(kp, 0.50, ctx)
+    drawKeypoints(kp, 0.40, ctx)
   }
 
   const startPoseNet = async () => {
