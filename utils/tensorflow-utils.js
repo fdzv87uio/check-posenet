@@ -155,7 +155,7 @@ export function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
   console.log(horizontalSD)
   console.log(verticalSD)
 
-  if ( verticalSD < 10 && horizontalSD < 10 ){
+  if ( verticalSD < 50 && horizontalSD < 50 ){
     if (kp9.score > minConfidence) {
       drawPoint(ctx, kp9.position.y, kp9.position.x, 25, '#FFD733')
       drawRing(ctx, kp9.position.y, kp9.position.x, 25, '#FFD733')
